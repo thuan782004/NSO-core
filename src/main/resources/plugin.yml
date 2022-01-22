@@ -1,0 +1,6 @@
+name: NSO_core
+version: '${version}'
+main: net.bearmine.nso_core.NSO_core
+api-version: 1.16
+authors: [ funayd ]
+description: Core plugin for nso project
