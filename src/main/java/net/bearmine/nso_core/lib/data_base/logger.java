@@ -5,7 +5,7 @@ public class logger {
         System.out.println(log);
     }
     public static void error(Exception e){
-        log("Error: "+e.getClass().getSimpleName());
-        log("Message: "+e.getMessage());        log("at: "+e.getCause().getLocalizedMessage());
+        if (e==null) return;
+        e.printStackTrace();
     }
 }

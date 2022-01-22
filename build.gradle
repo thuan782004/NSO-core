@@ -15,12 +15,14 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+    maven { url 'https://redempt.dev' }
 }
 configurations {
     extraLibs
 }
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+    compileOnly 'com.github.Redempt:RedLib:6.4.0.2'
     implementation 'org.xerial:sqlite-jdbc:3.36.0.2'
     implementation 'org.mozilla:rhino-engine:1.7.13'
     extraLibs 'org.mozilla:rhino-engine:1.7.13'
@@ -52,6 +54,7 @@ processResources {
     def props = [version: version]
     inputs.properties props
     filteringCharset 'UTF-8'
+    compileJava.options.encoding = 'UTF-8'
     filesMatching('plugin.yml') {
         expand props
     }

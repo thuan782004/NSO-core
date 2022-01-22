@@ -24,7 +24,11 @@ public class DataTable {
     }
     public ResultSet getInfo(){
         try {
-            return dataBase.getConnection().createStatement().executeQuery("PRAGMA table_info( "+name+" );");
+            return dataBase
+                    .getConnection()
+                    .createStatement()
+                    .executeQuery("PRAGMA table_info( "+
+                            name +" );");
         } catch ( SQLException e ) {
             logger.error(e);
             return null;

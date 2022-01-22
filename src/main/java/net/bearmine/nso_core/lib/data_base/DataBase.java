@@ -15,12 +15,17 @@ public class DataBase {
     protected DataBase(String name,File folder){
         File base = new File(folder,name+".db");
         try {
+            base.getParentFile().mkdirs();
             if (!base.exists()) if (!base.createNewFile()) {
                 System.out.println("Couldn't create data base file");
                 return;
             }
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:" + base);
+            if (connection==null) {
+                System.out.println("connection is null");
+                return;
+            }
             statement = connection.createStatement();
             connected = true;
             System.out.println("Connection to "+name+".db"+" was has been established");

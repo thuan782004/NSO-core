@@ -1,0 +1,6 @@
+inventory,inv{
+    permission nso.inventory.open
+    user player
+    help &aOpen nso inventory.
+    hook openShelf
+}
