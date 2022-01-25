@@ -1,6 +1,14 @@
 inventory,inv{
     permission nso.inventory.open
     user player
-    help &aOpen nso inventory.
+    help &aOpen nso inventory
     hook openShelf
+    size player:player int:size {
+        permission nso.inventory.admin
+        hook setSize
+    }
+    increate player:player int:size {
+        permission nso.inventory.admin
+        hook addSize
+    }
 }

@@ -25,6 +25,7 @@ dependencies {
     compileOnly 'com.github.Redempt:RedLib:6.4.0.2'
     implementation 'org.xerial:sqlite-jdbc:3.36.0.2'
     implementation 'org.mozilla:rhino-engine:1.7.13'
+    implementation(files('libs/MMOItems-6.6.4.jar'))
     extraLibs 'org.mozilla:rhino-engine:1.7.13'
     extraLibs 'org.xerial:sqlite-jdbc:3.36.0.2'
 }

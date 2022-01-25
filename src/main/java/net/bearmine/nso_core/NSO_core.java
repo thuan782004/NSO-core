@@ -1,7 +1,9 @@
 package net.bearmine.nso_core;
 
+import net.bearmine.nso_core.inventory.DeveloperCommand;
 import net.bearmine.nso_core.inventory.InventoryCommand;
 import net.bearmine.nso_core.lib.data_base.DataManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import redempt.redlib.commandmanager.CommandParser;
 
@@ -14,8 +16,10 @@ public final class NSO_core extends JavaPlugin {
     @Override
     public void onEnable() {  instance = this;
         saveDefaultConfig();
+        Bukkit.getPluginManager().registerEvents(InventoryCommand.getInstance(),this);
         new CommandParser(this.getResource("command.rdcml")).parse().register("nso",
-                new InventoryCommand()
+                InventoryCommand.getInstance(),
+                new DeveloperCommand()
                 );
     }
 

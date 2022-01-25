@@ -1,7 +1,9 @@
 package net.bearmine.nso_core.lib.data_base;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 
 public class DataTable {
 
@@ -54,7 +56,8 @@ public class DataTable {
         ResultSet result = get(key);
         try {while (result.next()) {
             String s = result.getString(column);
-            if (s!=null) return s;
+            if (s!=null&&!s.equals(""))
+            return isInt(s)?s:new String(decoder.decode(s));
         }
         return null;
         } catch ( SQLException e ) {
@@ -62,9 +65,21 @@ public class DataTable {
             return null;
         }
     }
+    public static final Base64.Encoder encoder = Base64.getEncoder();
+    public static final Base64.Decoder decoder = Base64.getDecoder();
     public void setString(String key,String column,String value){
+        if (value!=null&&!isInt(value))
+        value = encoder.encodeToString(value.getBytes(StandardCharsets.UTF_8));
         if (hasColumn(column)) dataBase.execute("ALTER TABLE "+name+" ADD COLUMN "+column+" VARCHAR(255);");
         dataBase.execute("INSERT OR IGNORE INTO "+name+" (ikey) VALUES ('"+key+"');");
         dataBase.execute("UPDATE "+name+" set "+column+" = '"+value+"' WHERE ikey = '"+key+"';");
+    }
+    public boolean isInt(String s){
+        try {
+            Integer.parseInt(s);
+            return true;
+        }catch ( NumberFormatException e ){
+            return false;
+        }
     }
 }

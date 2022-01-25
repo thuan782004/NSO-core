@@ -3,6 +3,18 @@ version: '${version}'
 main: net.bearmine.nso_core.NSO_core
 api-version: 1.16
 authors: [ funayd ]
-depend: [RedLib] #https://www.spigotmc.org/resources/redlib.78713/
+depend: [RedLib,MMOItems] #https://www.spigotmc.org/resources/redlib.78713/
 description: Core plugin for nso project
+permissions:
 
+  nso.admin:
+    default: op
+    children:
+      nso.inventory.admin:
+        default: op
+
+  nso.user:
+    default: true
+    children:
+      nso.inventory.open:
+        default: true
